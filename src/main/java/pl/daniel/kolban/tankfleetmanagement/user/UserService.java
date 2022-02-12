@@ -18,7 +18,6 @@ import pl.daniel.kolban.tankfleetmanagement.exception.domain.UserNotFoundExcepti
 import pl.daniel.kolban.tankfleetmanagement.exception.domain.UsernameExistException;
 import pl.daniel.kolban.tankfleetmanagement.tank.Tank;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import static pl.daniel.kolban.tankfleetmanagement.constant.UserImplConstant.*;
 
 
 @Service
-@Transactional
 @Qualifier("userDetailsService")
 @Slf4j
 public class UserService implements UserDetailsService {
