@@ -103,7 +103,6 @@ public class UserService implements UserDetailsService {
         currentUser.setHasAtomicButton(checkIfPresidentHasAtomicButton(country));
         currentUser.setActive(isActive);
         currentUser.setNotLocked(isNonLocked);
-        currentUser.setHasAtomicButton(hasAtomicButton);
         currentUser.setRole(getRoleEnumName(role).name());
         currentUser.setAuthorities(getRoleEnumName(role).getAuthorities());
         userRepository.save(currentUser);
