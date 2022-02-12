@@ -29,7 +29,6 @@ public class User implements Serializable {
     @Size(min=2, max=20)
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Range(min = 6)
     private String password;
     @NotBlank
     @Email(message="*Must be a valid email address")
