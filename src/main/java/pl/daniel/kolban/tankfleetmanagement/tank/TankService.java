@@ -2,17 +2,13 @@ package pl.daniel.kolban.tankfleetmanagement.tank;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.daniel.kolban.tankfleetmanagement.exception.domain.*;
-import pl.daniel.kolban.tankfleetmanagement.user.Role;
+import pl.daniel.kolban.tankfleetmanagement.exception.domain.PresidentNotFoundException;
+import pl.daniel.kolban.tankfleetmanagement.exception.domain.TankNotFoundException;
 import pl.daniel.kolban.tankfleetmanagement.user.User;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Slf4j
 @Transactional

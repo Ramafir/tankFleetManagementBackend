@@ -172,7 +172,8 @@ public class UserService implements UserDetailsService {
     }
     private boolean checkIfPresidentHasAtomicButton(String country) {
         return country.equalsIgnoreCase("USA") || country.equalsIgnoreCase("United States") || country.equalsIgnoreCase("China") || country.equalsIgnoreCase("DPRK") || country.equalsIgnoreCase("Russia")
-                || country.equalsIgnoreCase("France") || country.equalsIgnoreCase("Great Britain") || country.equalsIgnoreCase("North Korea");
+                || country.equalsIgnoreCase("France") || country.equalsIgnoreCase("Great Britain") || country.equalsIgnoreCase("North Korea") ||
+                country.equalsIgnoreCase("Stany Zjednoczone") || country.equalsIgnoreCase("Chiny") || country.equalsIgnoreCase("Rosja") || country.equalsIgnoreCase("Francja");
     }
 
     public User findUserById(Long id) {
