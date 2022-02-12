@@ -40,7 +40,7 @@ public class User implements Serializable {
     private boolean isActive;
     private boolean isNotLocked;
     private boolean hasAtomicButton;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "user")
     private List<Tank> tanks = new ArrayList<>();
 
 
