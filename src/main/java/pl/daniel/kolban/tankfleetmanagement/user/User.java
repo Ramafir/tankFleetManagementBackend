@@ -26,7 +26,7 @@ public class User implements Serializable {
     private String fullName;
     private String country;
     @NotBlank(message="*Must give a username")
-    @Size(min=2, max=20)
+    @Size(min=2, max=255)
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;

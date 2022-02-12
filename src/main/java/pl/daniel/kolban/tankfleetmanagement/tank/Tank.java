@@ -34,11 +34,11 @@ public class Tank implements Serializable {
     private Integer mileage;
     @Range(min = 0)
     private Integer ammunition;
-    @Range(min = 1)
+    @Range(min = 0)
     private Integer frontArmor;
-    @Range(min = 1)
+    @Range(min = 0)
     private Integer sideArmor;
-    @Range(min = 1)
+    @Range(min = 0)
     private Integer backArmor;
     private LocalDateTime creationDate;
     private LocalDateTime updateDate;
