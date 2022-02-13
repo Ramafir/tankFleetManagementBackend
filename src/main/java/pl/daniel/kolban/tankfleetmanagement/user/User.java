@@ -40,7 +40,7 @@ public class User implements Serializable {
     private boolean isActive;
     private boolean isNotLocked;
     private boolean hasAtomicButton;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Tank> tanks = new ArrayList<>();
 
 

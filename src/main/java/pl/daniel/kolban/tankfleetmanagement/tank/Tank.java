@@ -42,7 +42,7 @@ public class Tank implements Serializable {
     private Integer backArmor;
     private LocalDateTime creationDate;
     private LocalDateTime updateDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private User user;
 }
