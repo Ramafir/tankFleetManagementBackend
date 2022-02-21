@@ -2,10 +2,13 @@ package pl.daniel.kolban.tankfleetmanagement.tank;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import pl.daniel.kolban.tankfleetmanagement.exception.domain.WrongArgumentException;
 import pl.daniel.kolban.tankfleetmanagement.user.User;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,13 +34,14 @@ public class TankResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<Tank> saveTank(@RequestBody @Valid Tank tank) {
+    public ResponseEntity<Tank> saveTank(@RequestBody @Valid Tank tank) throws WrongArgumentException {
+
         Tank newTank = tankService.save(tank);
         return new ResponseEntity<>(newTank, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Tank> updateTank(@PathVariable Long id, @RequestBody @Valid Tank tank) {
+    public ResponseEntity<Tank> updateTank(@PathVariable Long id, @RequestBody Tank tank) {
         if(!id.equals(tank.getId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The updated object must have an id that matches the id in the resource path");
         Tank updateTank = tankService.update(tank);

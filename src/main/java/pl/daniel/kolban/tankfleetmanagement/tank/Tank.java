@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.daniel.kolban.tankfleetmanagement.user.User;
 
 import javax.persistence.*;
@@ -27,18 +28,12 @@ public class Tank implements Serializable {
     private String producer;
     private String model;
     private String currentModification;
-    @Range(min = 1900, max = 2022)
     private Integer yearOfProduction;
     private Date countryEntryDate;
-    @Range(min = 1)
     private Integer mileage;
-    @Range(min = 0)
     private Integer ammunition;
-    @Range(min = 0)
     private Integer frontArmor;
-    @Range(min = 0)
     private Integer sideArmor;
-    @Range(min = 0)
     private Integer backArmor;
     private LocalDateTime creationDate;
     private LocalDateTime updateDate;

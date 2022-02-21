@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.daniel.kolban.tankfleetmanagement.domain.HttpResponse;
-import pl.daniel.kolban.tankfleetmanagement.exception.domain.EmailExistException;
-import pl.daniel.kolban.tankfleetmanagement.exception.domain.EmailNotFoundException;
-import pl.daniel.kolban.tankfleetmanagement.exception.domain.UserNotFoundException;
-import pl.daniel.kolban.tankfleetmanagement.exception.domain.UsernameExistException;
+import pl.daniel.kolban.tankfleetmanagement.exception.domain.*;
 
 import javax.persistence.NoResultException;
 import java.io.IOException;
@@ -38,6 +35,11 @@ public class ExceptionHandling implements ErrorController {
     private static final String ERROR_PROCESSING_FILE = "Error occurred while processing file";
     private static final String NOT_ENOUGH_PERMISSION = "You do not have enough permission";
     public static final String ERROR_PATH = "/error";
+
+    @ExceptionHandler(WrongArgumentException.class)
+    public ResponseEntity<HttpResponse> jsonNotValidated() {
+        return createHttpResponse(BAD_REQUEST, METHOD_IS_NOT_ALLOWED);
+    }
 
     @ExceptionHandler(DisabledException.class)
     public ResponseEntity<HttpResponse> accountDisabledException() {
@@ -83,11 +85,6 @@ public class ExceptionHandling implements ErrorController {
     public ResponseEntity<HttpResponse> userNotFoundException(UserNotFoundException exception) {
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
     }
-
-//    @ExceptionHandler(NoHandlerFoundException.class)
-//    public ResponseEntity<HttpResponse> noHandlerFoundException(NoHandlerFoundException e) {
-//        return createHttpResponse(BAD_REQUEST, "There is no mapping for this URL");
-//    }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<HttpResponse> methodNotSupportedException(HttpRequestMethodNotSupportedException exception) {

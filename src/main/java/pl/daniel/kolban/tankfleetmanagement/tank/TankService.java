@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.daniel.kolban.tankfleetmanagement.exception.domain.PresidentNotFoundException;
 import pl.daniel.kolban.tankfleetmanagement.exception.domain.TankNotFoundException;
+import pl.daniel.kolban.tankfleetmanagement.exception.domain.WrongArgumentException;
 import pl.daniel.kolban.tankfleetmanagement.user.User;
 
 import javax.transaction.Transactional;
@@ -30,7 +31,8 @@ public class TankService {
         return tankRepository.findById(id).orElseThrow(TankNotFoundException::new);
     }
 
-    public Tank save(Tank tank) {
+    public Tank save(Tank tank) throws WrongArgumentException {
+        validateTankData(tank);
         log.info("Saving new tank: {}", tank.getModel());
         tank.setCreationDate(LocalDateTime.now());
         return tankRepository.save(tank);
@@ -51,5 +53,21 @@ public class TankService {
         return tankRepository.findById(tankId)
                 .map(Tank::getUser)
                 .orElseThrow(PresidentNotFoundException::new);
+    }
+
+    private void validateTankData(Tank tank) throws WrongArgumentException {
+        if (tank.getYearOfProduction() < 1900 || tank.getYearOfProduction() > LocalDateTime.now().getYear()) {
+            throw new WrongArgumentException("Year of production must be between 1900 and current");
+        } else if (tank.getAmmunition() < 0) {
+            throw new WrongArgumentException("Cannot be negative number");
+        } else if (tank.getMileage() < 0) {
+            throw new WrongArgumentException("Cannot be negative number");
+        } else if (tank.getSideArmor() < 0) {
+            throw new WrongArgumentException("Cannot be negative number");
+        } else if (tank.getFrontArmor() < 0) {
+            throw new WrongArgumentException("Cannot be negative number");
+        } else if (tank.getBackArmor() < 0) {
+            throw new WrongArgumentException("Cannot be negative number");
+        }
     }
 }
